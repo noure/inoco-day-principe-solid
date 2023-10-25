@@ -1,0 +1,700 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" media="all" href="common/theme/css/default.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="common/theme/css/phone.css">
+    <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+
+    <script data-main="slide" src="common/js/require-1.0.8.min.js"></script>
+
+
+</head>
+<body style="opacity: 0">
+<header>
+    <img src="images/common/etiquetteinoco.png" alt="inoco" title="inoco"/>
+</header>
+
+<slides class="layout-widescreen">
+
+    <slide class="logoslide nobackground">
+        <article class="flexbox vcenter">
+            <span><img src="images/common/easymaker_577_200.png"></span>
+        </article>
+    </slide>
+
+    <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="images/common/easymaker_165_128.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+        <hgroup class="auto-fadein">
+            <h1 data-config-title><!-- populated from slide_config.json --></h1>
+            <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+            <p data-config-presenter><!-- populated from slide_config.json --></p>
+        </hgroup>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Sommaire</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Introduction</li>
+
+                <li>Principe S - Single Responsibility Principle</li>
+
+                <li>Principe O - Open/Closed Principle</li>
+
+                <li>Principe L - Liskov Substitution Principle</li>
+
+                <li>Principe I - Interface Segregation Principle</li>
+
+                <li>Principe D - Dependency Inversion Principle</li>
+
+                <li>Mise en pratique des principes SOLID</li>
+
+                <li>Bibliographie</li>
+
+                <li>Questions</li>
+            </ul>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Introduction</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Ensemble de cinq principes de conception, visent à rendre un système :</li>
+
+                <ul class="build">
+                    <li>Compréhensible</li>
+                    <li>Flexible</li>
+                    <li>Maintenable</li>
+                    <li>Facile à étendre au fil du temps.</li>
+                </ul>
+            </ul>
+        </article>
+    </slide>
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Introduction</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Robert C. Martin (Uncle Bob):
+                    <ul class="build">
+                        <li>Programmer depuis 1970</li>
+                        <li>Président, Fondateur de Object Mentor</li>
+                        <li>Co-Auteur du Manifeste Agile</li>
+                        <li>Auteur de nombreux livres :
+                            <ul>
+                                <li>Agile Software Development, Principles, Patterns, and Practices</li>
+                                <li>Clean Code : A Handbook of Agile Software Craftmanship</li>
+                                <li>Clean Coder : A Code of Conduct for Professional Programmers</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+    </slide>
+    <slide class="slide">
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Introduction</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Les cinq principes sont :
+
+                    <ul class="build">
+                        <li>S - Single Responsibility Principle (Principe de Responsabilité Unique)</li>
+                        <li>O - Open/Closed Principle (Principe Ouvert/Fermé)</li>
+                        <li>L - Liskov Substitution Principle (Principe de Substitution de Liskov)</li>
+                        <li>I - Interface Segregation Principle (Principe de Ségrégation des Interfaces)</li>
+                        <li>D - Dependency Inversion Principle (Principe d'Inversion des Dépendances)</li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+
+    </slide>
+
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de responsabilité unique</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Une classe doit avoir une seule raison de changer, c'est-à-dire une seule responsabilité.</p>
+                </li>
+                <li>Exemple qui viole le principe :
+                </li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+
+  class Document {
+      String title;
+      String content;
+
+      void print() {
+          // Code pour imprimer le document
+      }
+  }
+
+                 </pre>
+                </li>
+            </ul>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de responsabilité unique</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Cet exemple viole le principe de responsabilité unique car la classe Document gère à la fois les
+                    informations du document et son impression.
+                </li>
+                <li>Exemple refactorisé pour respecter le principe:
+                </li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+  class Document {
+      String title;
+      String content;
+  }
+
+  class DocumentPrinter {
+      void print(Document doc) {
+          // Code pour imprimer le document
+      }
+  }</pre>
+                </li>
+                <li>Le respect du principe de responsabilité unique est essentiel pour écrire un code propre et
+                    maintenable.
+                </li>
+            </ul>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe Open/Closed</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+
+                <li>Une classe doit être <u>ouverte</u> à l'extension mais <u>fermée</u> à la modification.</li>
+                <li>Cela signifie qu'un comportement d'une classe peut être étendu sans modifier son code source.</li>
+                <li>Exemple qui viole le principe :</li>
+
+            </ul>
+        </article>
+    </slide>
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe Open/Closed</h3>
+        </hgroup>
+        <article>
+
+            <ul>
+                <li> <pre class="prettyprint" data-lang="java">
+  class Shape {
+      String type;
+  }
+  class AreaCalculator {
+      double calculateArea(Shape[] shapes) {
+          double area = 0;
+          for (Shape shape : shapes) {
+              if (shape.type.equals("circle")) {
+                  // Code pour calculer l'aire d'un cercle
+              } else if (shape.type.equals("square")) {
+                  // Code pour calculer l'aire d'un carré
+              }
+          }
+          return area;
+      }
+  }  </pre></li>
+            </ul>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe Open/Closed</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Exemple refactorisé pour respecter le principe: </li>
+                <li> D'abord les class Shape,Circle et Square:
+                </li>
+                <li><pre class="prettyprint" data-lang="java">
+  abstract class Shape {
+      abstract double calculateArea();
+  }
+  class Circle extends Shape {
+      double radius;
+      double calculateArea() {
+          return Math.PI * radius * radius;
+      }
+  }
+ class Square extends Shape {
+      double side;
+      double calculateArea() {
+          return side * side;
+      }
+}</pre></li>
+            </ul>
+
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe Open/Closed</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>La class AreaCalculator : </li>
+                <li><pre class="prettyprint" data-lang="java">
+  class AreaCalculator {
+      double calculateArea(Shape[] shapes) {
+          double area = 0;
+          for (Shape shape : shapes) {
+              area += shape.calculateArea();
+          }
+          return area;
+      }
+  }
+                </pre></li>
+                </ul>
+
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe Open/Closed</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Cet exemple respecte le principe Open/Closed.</li>
+                <li>La classe AreaCalculator n'a pas besoin d'être modifiée si nous voulons ajouter une nouvelle forme.</li>
+                <li>Nous pouvons simplement créer une nouvelle classe qui étend Shape et implémente la méthode calculateArea.</li>
+                <li>Conclusion : Le respect du principe Open/Closed est essentiel pour créer un code
+                <ul>
+                    <li> Flexible,</li>
+                    <li> Maintenable,</li>
+                    <li> Facile à étendre sans être modifié.</li>
+                </ul>
+                </li>
+            </ul>
+
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de Substitution de Liskov</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Le principe de substitution de Liskov stipule que les objets d'une classe dérivée doivent pouvoir être remplacés par des objets de la classe de base sans affecter la correction du programme.</li>
+                <li>Exemple qui viole le principe:</li>
+                <li> <pre class="prettyprint" data-lang="java">
+    class Bird {
+      void fly() {
+          // Code pour faire voler l'oiseau
+      }
+    }
+    class Penguin extends Bird {
+      void fly() {
+          throw new UnsupportedOperationException("Penguins can't fly");
+      }
+    } </pre>
+                </li>
+            </ul>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de Substitution de Liskov</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+               <li>Exemple refactorisé pour respecter le principe:</li>
+                <li> <pre class="prettyprint" data-lang="java">
+ class Bird {
+  }
+ class FlyingBird extends Bird {
+      void fly() {
+          // Code pour faire voler l'oiseau
+      }
+  }
+ class Penguin extends Bird {
+  }</pre>
+                </li>
+             </ul>
+
+        </article>
+    </slide>
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de Substitution de Liskov</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Cet exemple respecte le principe de substitution de Liskov.</li>
+                <li>Les manchots qui ne peuvent pas voler ne sont pas forcés d'implémenter une méthode fly qui lève une exception,</li>
+                <li>Ils héritent simplement de la classe Bird qui ne contient pas la méthode fly.</li>
+                <li>Le respect du principe de substitution de Liskov est essentiel pour créer un code :
+                    <ul>
+                        <li>Flexible, </li>
+                        <li>Maintenable où les classes dérivées peuvent être utilisées de manière interchangeable avec leurs classes de base. </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </article>
+    </slide>
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de Ségrégation des Interfaces</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Le principe de ségrégation des interfaces stipule qu'une classe ne doit pas être forcée d'implémenter des interfaces qu'elle n'utilise pas.</li>
+                <li>Exemple qui viole le principe : </li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+    interface Worker {
+          void work();
+          void eat();
+      }
+    class OfficeWorker implements Worker {
+      void work() {// Code pour travailler
+      }
+      void eat() { // Code pour manger
+      }
+    }              </pre>
+                </li>
+            </ul>
+        </article>
+    </slide>
+
+
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de Ségrégation des Interfaces</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Suite de l'exemple : </li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+          class Robot implements Worker {
+              void work() { // Code pour travailler
+              }
+              void eat() {// Cette méthode n'a pas de sens pour un robot
+              }
+          } </pre>
+                </li>
+                <li>Cet exemple viole le principe de ségrégation des interfaces car la classe Robot est forcée d'implémenter la méthode eat qui n'a pas de sens pour un robot.</li>
+            </ul>
+
+        </article>
+
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de Ségrégation des Interfaces</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Exemple refactorisé pour respecter le principe : </li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+      interface Worker {
+      void work();
+      }
+      interface Eater {
+          void eat();
+      }
+      class OfficeWorker implements Worker, Eater {
+          void work() {// Code pour travailler
+          }
+          void eat() {// Code pour manger
+          }
+      }</pre>
+                </li>
+              </ul>
+
+        </article>
+
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe de Ségrégation des Interfaces</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Exemple refactorisé pour respecter le principe : </li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+      class Robot implements Worker {
+          void work() { // Code pour travailler
+          }
+      }</pre>
+                </li>
+                <li>Cet exemple respecte le principe de ségrégation des interfaces.</li>
+                <li>La classe Robot n'est plus forcée d'implémenter une méthode qui n'a pas de sens pour elle.</li>
+                <li>Le respect du principe de ségrégation des interfaces est essentiel pour créer un code:
+                    <ul>
+                        <li>Flexible,</li>
+                        <li>Maintenable où les classes ne sont pas forcées d'implémenter des méthodes qu'elles n'utilisent pas.</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </article>
+
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe d'Inversion des Dépendances</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Le principe d'inversion des dépendances stipule que :</li>
+                <ul class="build">
+                    <li> les classes de haut niveau ne doivent pas dépendre des classes de bas niveau, </li>
+                    <li>Mais plutôt que les deux doivent dépendre des abstractions.</li>
+                    <li>En outre, les abstractions ne doivent pas dépendre des détails;</li>
+                    <li>Ce sont les détails qui doivent dépendre des abstractions. </li>
+
+                </ul>
+
+                <li>Exemple qui viole le principe :</li>
+
+            </ul>
+
+        </article>
+
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe d'Inversion des Dépendances</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+              <li>  <pre class="prettyprint" data-lang="java">
+    class LightBulb {
+      void turnOn() { // Code pour allumer l'ampoule
+      }
+      void turnOff() { // Code pour éteindre l'ampoule
+      }
+    }
+  class Switch {
+      LightBulb bulb;
+      Switch(LightBulb bulb) {
+          this.bulb = bulb;
+      }
+      void operate() {
+          // Code pour utiliser l'interrupteur
+      }
+  }</pre></li>
+
+            </ul>
+
+        </article>
+
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe d'Inversion des Dépendances</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Exemple refactorisé pour respecter le principe :</li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+  interface Switchable {
+      void turnOn();
+      void turnOff();
+  }
+
+  class LightBulb implements Switchable {
+
+      void turnOn() { // Code pour allumer l'ampoule
+      }
+
+      void turnOff() {// Code pour éteindre l'ampoule
+      }
+   }</pre></li>
+
+            </ul>
+
+        </article>
+
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Principe d'Inversion des Dépendances</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Suite de l'exemple refactorisé :</li>
+                <li>
+                    <pre class="prettyprint" data-lang="java">
+    class Switch {
+          Switchable device;
+          Switch(Switchable device) {
+              this.device = device;
+          }
+          void operate() {// Code pour utiliser l'interrupteur
+          }
+      }</pre></li>
+
+                <li>Cet exemple respecte le principe d'inversion des dépendances.</li>
+                <li>La classe Switch dépend maintenant de l'abstraction Switchable,</li>
+                <li>Et non plus de la classe de bas niveau LightBulb.</li>
+                <li>Ceci permet une plus grande flexibilité et facilite le test et la maintenance du code.</li>
+            </ul>
+
+        </article>
+
+    </slide>
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Mise en Pratique des Principes SOLID</h3>
+        </hgroup>
+        <article>
+            <h4>Questions à poser pendant la conception :</h4>
+            <br/>
+            <br/>
+            <ul class="build">
+
+                    <li>Est-ce que chaque classe a une seule responsabilité ?</li>
+                    <li>Est-ce que le système est ouvert à l'extension mais fermé à la modification ?</li>
+                    <li>Est-ce que les classes dérivées peuvent être substituées à leurs classes de base sans affecter le comportement du programme ?</li>
+                    <li>Est-ce que les classes ne sont pas forcées d'implémenter des interfaces qu'elles n'utilisent pas ?</li>
+                    <li>Est-ce que les dépendances sont inversées, c'est-à-dire que les classes de haut niveau dépendent d'abstractions et non de classes de bas niveau ?</li>
+
+            </ul>
+        </article>
+    </slide>
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Bibliographie</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Robert C. Martin :
+                    <ul>
+                        <li>Agile Software Development...</li>
+                        <li>Live with uncle Bob : https://www.youtube.com/watch?v=TMuno5RZNeE&ab_channel=Peoplecareer</li>
+                    </ul>
+                </li>
+                <li>Martin Fowler :
+                    <ul>
+                        <li>Refactoring : Improving the Design of Existing Code</li>
+                        <li>" Any fool can write code that a computer can understand. Good programmers write code that humans can understand. "</li>
+                    </ul>
+                </li>
+                <li>Michael C. Feathers :
+                    <ul>
+                        <li>Working Effectively with Legacy Code</li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+    </slide>
+    <slide>
+        <hgroup>
+            <h2>Principes SOLID</h2>
+            <h3>Questions</h3>
+        </hgroup>
+        <article>
+            <img src="images/common/question_bleu.jpg" alt="Questions" title="Questions">
+            <img src="images/common/question_rouge.png" alt="Questions" title="Questions">
+            <img src="images/common/question_vert.jpg" alt="Questions" title="Questions">
+        </article>
+    </slide>
+
+    <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+<!--[if IE]>
+<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+<script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
